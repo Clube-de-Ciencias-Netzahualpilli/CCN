@@ -3,10 +3,10 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 class MobileDesktopViewBuilder extends StatelessWidget {
   const MobileDesktopViewBuilder({
-    Key key,
-    this.showMobile,
-    @required this.mobileView,
-    @required this.desktopView,
+    required Key key,
+    required this.showMobile,
+    required this.mobileView,
+    required this.desktopView,
   }) : super(key: key);
 
   final bool showMobile;
@@ -17,7 +17,7 @@ class MobileDesktopViewBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (_, size) {
-        if (showMobile ?? size.isMobile) return mobileView;
+        if (showMobile) return mobileView;
         return desktopView;
       },
     );

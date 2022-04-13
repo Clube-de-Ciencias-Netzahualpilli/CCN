@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_const
 
 import 'package:flutter/material.dart';
 
 String appName = 'Club de Ciencias Netzahualpilli';
+const double kInitWidth = 1507;
+const kScreenPadding = const EdgeInsets.symmetric(horizontal: 20);
 
 
 class AppColors {

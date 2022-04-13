@@ -4,7 +4,6 @@ import 'package:ccn/screen/home/home.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-
   runApp(const MyApp());
 }
 
@@ -17,14 +16,11 @@ class MyApp extends StatelessWidget {
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
         home: AnimatedSplashScreen(
-          backgroundColor: AppColors.dark1,
-          splash: Image.asset(
-            'assets/images/img1.jpg',
-            fit: BoxFit.cover,
-          ),
-          nextScreen: 
-          const HomePage(),
-          splashTransition: SplashTransition.fadeTransition,
+          duration: 200,
+          backgroundColor: Colors.white,
+          splash: Image.asset('assets/images/img1.jpg'),
+          nextScreen: const HomePage(),
+          splashTransition: SplashTransition.scaleTransition,
         ),
       );
 }
