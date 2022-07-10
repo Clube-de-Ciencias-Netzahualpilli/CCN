@@ -12,7 +12,8 @@ class AppColors {
   static Color gray1 = Color(0xFF828690);
   static Color blue1 = Color(0xFF00AEEF);
   static Color green1 = Color(0xFF00E583);
-  static Color red1 = Color(0xFFB01235);
+  static Color red1 = Color(0xFF8E3827);
+  static Color red2 = Color(0xFF8D362D);
 }
 
 ThemeData darkTheme = ThemeData(
