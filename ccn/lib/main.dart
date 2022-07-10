@@ -15,14 +15,15 @@ class MyApp extends StatelessWidget {
         title: appName,
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
-        home: AnimatedSplashScreen(
-          backgroundColor: Colors.white,
-          splash: Image.asset(
-            'assets/images/img1.jpg',
-            fit: BoxFit.fitWidth,
-          ),
-          nextScreen:  HomePage(),
-          splashTransition: SplashTransition.fadeTransition,
-        ),
+        // home: AnimatedSplashScreen(
+        //   backgroundColor: Colors.white,
+        //   splash: Image.asset(
+        //     'assets/images/img1.jpg',
+        //     fit: BoxFit.fitWidth,
+        //   ),
+        //   nextScreen:  HomePage(),
+        //   splashTransition: SplashTransition.fadeTransition,
+        // ),
+        home: const HomePage(),
       );
 }

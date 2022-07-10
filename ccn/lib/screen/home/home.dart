@@ -1,82 +1,71 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, duplicate_ignore, duplicate_ignore, duplicate_ignore, duplicate_ignore
-
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:ccn/models/constants.dart';
+import 'package:ccn/screen/introduction/first_page.dart';
 import 'package:ccn/widgets/drawer.dart';
-import 'package:fade_scroll_app_bar/fade_scroll_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
-  final _scrollController = ScrollController();
+class HomePage extends StatefulWidget {
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool isOpened = false;
+
+  final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
+  final GlobalKey<SideMenuState> _endSideMenuKey = GlobalKey<SideMenuState>();
+
+  toggleMenu([bool end = false]) {
+    if (end) {
+      final _state = _endSideMenuKey.currentState!;
+      if (_state.isOpened) {
+        _state.closeSideMenu();
+      } else {
+        _state.openSideMenu();
+      }
+    } else {
+      final _state = _sideMenuKey.currentState!;
+      if (_state.isOpened) {
+        _state.closeSideMenu();
+      } else {
+        _state.openSideMenu();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FadeScrollAppBar(
-        scrollController: _scrollController,
-        appBarLeading: Icon(Icons.flutter_dash_outlined, color: Colors.black),
-        appBarTitle: Text(appName,
-        style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Fredoka One',   
-        ),
-        ),
-        appBarForegroundColor: AppColors.red1,
-        pinned: true,
-        fadeOffset: 120,
-        expandedHeight: 250,
-        backgroundColor: Colors.white,
-        fadeWidget: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Una vista nueva \npara un mundo nuevo",
-                style: Theme.of(context).textTheme.headline2?.copyWith(
-                      color: Colors.black,
-                    )),
-          ],
-        ),
-        bottomWidgetHeight: 40,
-        bottomWidget: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Chip(
-              label: Text("Great"),
-              backgroundColor: Colors.amber,
-              side: BorderSide(
-                color: Colors.white,
-                width: 1,
-              ),
+    return SideMenu(
+      background: AppColors.red1,
+      key: _sideMenuKey,
+      menu: buildMenu(),
+      type: SideMenuType.slideNRotate,
+      onChange: (_isOpened) {
+        setState(() => isOpened = _isOpened);
+      },
+      child: IgnorePointer(
+        ignoring: isOpened,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(appName),
+            leading: IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () => toggleMenu(),
             ),
-            SizedBox(width: 10),
-            Chip(
-              label: Text("App Bar"),
-              backgroundColor: Colors.amber,
-              side: BorderSide(
-                color: Colors.white,
-                width: 1,
-              ),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: const [
+                ContentPage(),
+              ],
             ),
-          ],
-        ),
-        child: ListView.builder(
-          itemCount: 100,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 100,
-                width: 300,
-                color: Colors.blue,
-              ),
-            );
-          },
+          ),
         ),
       ),
-      endDrawer: DrawerApp(),
     );
   }
 }
